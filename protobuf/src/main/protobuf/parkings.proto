@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.scalavr.protos;
+
+message Park{
+    string name=1;
+    int32 size=2;
+    double amount=3;
+}
+
+message ReservationRequest {
+    int32 code=1;
+    repeated Park park=2;
+}
+
+message ReservationReply{
+    int32 orderID=1;
+    repeated Park park=2;
+    bool status=3;
+}
+
+service ParkingService {
+    rpc SendReservation (stream ReservationRequest) returns (stream ReservationReply);
+}
